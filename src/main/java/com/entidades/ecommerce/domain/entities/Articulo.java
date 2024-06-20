@@ -24,7 +24,6 @@ public class Articulo  extends Base {
     protected String denominacion;
     protected Double precioVenta;
 
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "articulo_id")
     @Builder.Default
