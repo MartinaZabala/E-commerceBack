@@ -20,6 +20,6 @@ public class PromocionDetalle extends Base{
     private int cantidad;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "articuloManufacturado_id")
-    private ArticuloManufacturado articuloManufacturado;
+    @JoinColumn(name = "articulo_id")
+    private Articulo articulo;
 }

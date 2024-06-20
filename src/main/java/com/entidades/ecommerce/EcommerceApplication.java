@@ -38,5 +38,4 @@ public class EcommerceApplication {
 			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
 		};
 	}
-
 }
