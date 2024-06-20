@@ -7,7 +7,10 @@ import com.entidades.ecommerce.domain.entities.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ecommerce")
@@ -20,17 +23,22 @@ public class EcommerceController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping("/articulos/sortedByPrecio")
-    public Page<Articulo> getFilteredArticulosSortedByPrecio(Pageable pageable) {
-        return ecommerceFacade.getFilteredArticulosSortedByPrecio(pageable);
+    @GetMapping("/articulos")
+    public ResponseEntity<List<Articulo>> getAll() {
+        List<Articulo> articulos = ecommerceFacade.getAll();
+        return ResponseEntity.ok(articulos);
     }
 
+    @GetMapping("/articulos/sortedByPrecio")
+    public ResponseEntity<Page<Articulo>> getFilteredArticulosSortedByPrecio(Pageable pageable) {
+        Page<Articulo> articulos = ecommerceFacade.getFilteredArticulosSortedByPrecio(pageable);
+        return ResponseEntity.ok(articulos);
+    }
 
     @GetMapping("/articulosByCategoria/{idCategoria}")
-    public Page<Articulo> getAllArticulosByCategoria(Pageable pageable, @PathVariable Long idCategoria) {
-        // Lógica para obtener los artículos por categoría utilizando idCategoria
+    public ResponseEntity<Page<Articulo>> getAllArticulosByCategoria(Pageable pageable, @PathVariable Long idCategoria) {
         Categoria categoria = categoriaService.getById(idCategoria); // Suponiendo que tienes un servicio para obtener la categoría por ID
-        return ecommerceFacade.getAllArticulosByCategoria(pageable, categoria);
+        Page<Articulo> articulos = ecommerceFacade.getAllArticulosByCategoria(pageable, categoria);
+        return ResponseEntity.ok(articulos);
     }
-
 }

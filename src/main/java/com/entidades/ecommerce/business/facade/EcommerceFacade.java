@@ -12,4 +12,6 @@ public interface EcommerceFacade {
     Page<Articulo> getFilteredArticulosSortedByPrecio(Pageable pageable);
 
     Page<Articulo> getAllArticulosByCategoria(Pageable pageable, Categoria categoria);
+
+    List<Articulo> getAll();
 }
