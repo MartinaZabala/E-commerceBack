@@ -22,22 +22,31 @@ public class EcommerceServiceImpl implements EcommerceService {
     @Autowired
     private ArticuloRepository articuloRepository;
 
-    @Override
-    public Page<Articulo> getAllFilteredArticulosSortedByPrecio(Pageable pageable) {
-
-        Page<ArticuloInsumo> insumosParaElaborar = articuloRepository.findInsumos(pageable);
-        Page<ArticuloManufacturado> manufacturados = articuloRepository.findManufacturados(pageable);
-
-        // Combinar ambas páginas
+    public List<Articulo> getAll() {
         List<Articulo> allArticulos = new ArrayList<>();
+
+        Page<ArticuloInsumo> insumosParaElaborar = articuloRepository.findInsumos(Pageable.unpaged());
+        Page<ArticuloManufacturado> manufacturados = articuloRepository.findManufacturados(Pageable.unpaged());
+
         allArticulos.addAll(insumosParaElaborar.getContent());
         allArticulos.addAll(manufacturados.getContent());
+
+        return allArticulos;
+    }
+
+    @Override
+    public Page<Articulo> getAllFilteredArticulosSortedByPrecio(Pageable pageable) {
+        List<Articulo> allArticulos = getAll();
 
         // Ordenar por precio
         allArticulos.sort(Comparator.comparingDouble(Articulo::getPrecioVenta));
 
         // Convertir la lista a Page
-        return new PageImpl<>(allArticulos, pageable, allArticulos.size());
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), allArticulos.size());
+        Page<Articulo> page = new PageImpl<>(allArticulos.subList(start, end), pageable, allArticulos.size());
+
+        return page;
     }
 
     @Override
@@ -53,5 +62,4 @@ public class EcommerceServiceImpl implements EcommerceService {
 
         return new PageImpl<>(allArticulos, pageable, allArticulos.size());
     }
-
 }

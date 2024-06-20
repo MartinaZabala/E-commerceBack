@@ -18,6 +18,11 @@ public class EcommerceFacadeImpl implements EcommerceFacade {
     private EcommerceService ecommerceService;
 
     @Override
+    public List<Articulo> getAll() {
+        return ecommerceService.getAll();
+    }
+
+    @Override
     public Page<Articulo> getFilteredArticulosSortedByPrecio(Pageable pageable) {
         return ecommerceService.getAllFilteredArticulosSortedByPrecio(pageable);
     }
