@@ -22,7 +22,7 @@ import java.util.Set;
 @Audited
 public class Categoria extends Base {
     private String denominacion;
-
+    private boolean esInsumo;
     // Relación muchos a uno con la misma entidad (padre)
     @ManyToOne
     @JoinColumn(name = "categoria_padre_id") // Nombre de la columna en la tabla de categoría que referencia al padre

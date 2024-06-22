@@ -28,6 +28,12 @@ public class CategoriaServiceImp extends BaseServiceImp<Categoria, Long> impleme
     @Autowired
     CategoriaMapper categoriaMapper;
     @Override
+    public List<Categoria> getAll() {
+        // Obtener todas las categorías del repositorio
+        List<Categoria> categorias = categoriaRepository.categorias();
+        return categorias;
+    }
+    @Override
     public List<CategoriaCreateDto> categoriaSucursal(Long idSucursal) {
         // Obtener la lista de categorías que están asociadas a la sucursal
         List<Categoria> categorias = this.categoriaRepository.categoriaSucursal(idSucursal);
