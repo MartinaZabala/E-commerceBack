@@ -23,28 +23,11 @@ public class ArticuloInsumoFacadeImp extends BaseFacadeImp<ArticuloInsumo, Artic
     @Autowired
     ArticuloInsumoService articuloInsumoService;
     @Override
-    public ResponseEntity<List<Map<String, Object>>> getAllImagesByInsumoId(Long id) {
-        return articuloInsumoService.getAllImagesByInsumoId(id);
-    }
-    @Override
     public List<ArticuloInsumoFullDto> insumosParaElaborar(Long idSucursal) {
         return this.articuloInsumoService.insumosParaElaborar(idSucursal);
     }
     @Override
     public List<ArticuloInsumoFullDto> insumos(Long idSucursal) {
         return this.articuloInsumoService.insumos(idSucursal);
-    }
-    @Override
-    public ResponseEntity<String> uploadImages(MultipartFile[] files, Long id) {
-        return articuloInsumoService.uploadImages(files,id);
-    }
-
-    @Override
-    public ResponseEntity<String> deleteImage(String publicId, Long id) {
-        return articuloInsumoService.deleteImage(publicId, id);
-    }
-    @Override
-    public ResponseEntity<Number> descontarStock(ArticuloInsumo articuloInsumo, Integer cantidad) {
-        return articuloInsumoService.descontarStock(articuloInsumo, cantidad);
     }
 }

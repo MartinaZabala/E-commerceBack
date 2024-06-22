@@ -32,23 +32,4 @@ public abstract class BaseControllerImp <E extends Base,D extends BaseDto, ID ex
         logger.info("INICIO GET ALL");
         return ResponseEntity.ok(facade.getAll());
     }
-
-    @PostMapping()
-    public ResponseEntity<D> create(@RequestBody D entity){
-        logger.info("INICIO CREATE {}",entity.getClass());
-        return ResponseEntity.ok(facade.createNew(entity));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<D> edit(@RequestBody D entity, @PathVariable ID id){
-        logger.info("INICIO EDIT {}",entity.getClass());
-        return ResponseEntity.ok(facade.update(entity, id));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable ID id){
-        logger.info("INICIO DELETE BY ID");
-        facade.deleteById(id);
-        return ResponseEntity.ok(null);
-    }
 }

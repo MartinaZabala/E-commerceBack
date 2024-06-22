@@ -12,14 +12,4 @@ import java.util.Map;
 public interface ArticuloInsumoService extends BaseService<ArticuloInsumo, Long> {
     List<ArticuloInsumoFullDto> insumosParaElaborar(Long idSucursal);
     List<ArticuloInsumoFullDto> insumos(Long idSucursal);
-
-    //Imagenes
-    // Método para obtener todas las imágenes almacenadas
-    ResponseEntity<List<Map<String, Object>>> getAllImagesByInsumoId(Long id);
-    // Método para subir imágenes al sistema
-    ResponseEntity<String> uploadImages(MultipartFile[] files, Long id);
-    // Método para eliminar una imagen por su identificador público y Long
-    ResponseEntity<String> deleteImage(String publicId, Long id);
-    ResponseEntity<Number> descontarStock(ArticuloInsumo articuloInsumo, Integer cantidad);
-
 }

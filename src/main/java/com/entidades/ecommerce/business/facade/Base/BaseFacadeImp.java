@@ -20,14 +20,6 @@ public abstract class BaseFacadeImp <E extends Base,D extends BaseDto,ID extends
         this.baseMapper = baseMapper;
     }
 
-    public D createNew(D request){
-        // Convierte a entidad
-        var entityToCreate = baseMapper.toEntity(request);
-        // Graba una entidad
-        var entityCreated = baseService.create(entityToCreate);
-        // convierte a Dto para devolver
-        return baseMapper.toDTO(entityCreated);
-    }
 
     public D getById(ID id){
         // Busca una entidad por id
@@ -44,16 +36,6 @@ public abstract class BaseFacadeImp <E extends Base,D extends BaseDto,ID extends
                 .stream()
                 .map(baseMapper::toDTO)
                 .collect(Collectors.toList());
-    }
-
-    public void deleteById(ID id){
-        baseService.deleteById(id);
-    }
-
-    public D update(D request, ID id){
-        var entityToUpdate = baseMapper.toEntity(request);
-        var entityUpdated = baseService.update(entityToUpdate, id);
-        return baseMapper.toDTO(entityUpdated);
     }
 
 }
