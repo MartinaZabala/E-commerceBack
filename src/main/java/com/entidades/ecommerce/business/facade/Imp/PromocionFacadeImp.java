@@ -25,18 +25,4 @@ public class PromocionFacadeImp extends BaseFacadeImp<Promocion, PromocionFullDt
     public List<PromocionFullDto> promocionSucursal(Long idSucursal) {
         return this.promocionService.promocionSucursal(idSucursal);
     }
-    @Override
-    public ResponseEntity<List<Map<String, Object>>> getAllImagesByPromocionId(Long id) {
-        return promocionService.getAllImagesByPromocionId(id);
-    }
-
-    @Override
-    public ResponseEntity<String> uploadImages(MultipartFile[] files, Long id) {
-        return promocionService.uploadImages(files,id);
-    }
-
-    @Override
-    public ResponseEntity<String> deleteImage(String publicId, Long id) {
-        return promocionService.deleteImage(publicId, id);
-    }
 }

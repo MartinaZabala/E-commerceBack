@@ -17,13 +17,6 @@ public abstract class BaseServiceImp<E extends Base,ID extends Serializable> imp
     protected BaseRepository<E,ID> baseRepository;
 
     @Override
-    public E create(E request){
-        var newEntity = baseRepository.save(request);
-        logger.info("Creada entidad {}",newEntity);
-        return newEntity;
-    }
-
-    @Override
     public E getById(ID id){
         var entity = baseRepository.getById(id);
         logger.info("Obtenida entidad {}",entity);
@@ -35,28 +28,5 @@ public abstract class BaseServiceImp<E extends Base,ID extends Serializable> imp
         var entities = baseRepository.getAll();
         logger.info("Obtenidas entidades {}",entities);
         return entities;
-    }
-
-    @Override
-    public void deleteById(ID id){
-        var entity = baseRepository.findById(id);
-
-        entity.ifPresent((value) -> {
-            baseRepository.delete(value);
-            logger.info("Borrada logicamente entidad {}",value);
-        });
-
-    }
-
-    @Override
-    public E update(E request, ID id){
-        var optionalEntity = baseRepository.findById((ID) request.getId());
-        if (optionalEntity.isEmpty()){
-            logger.error("No se encontro una entidad con el id " + request.getId());
-            throw new RuntimeException("No se encontro una entidad con el id " + request.getId());
-        }
-        var newEntity = baseRepository.save(request);
-        logger.info("Actualizada entidad {}",newEntity);
-        return newEntity;
     }
 }

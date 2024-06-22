@@ -29,22 +29,4 @@ public class CategoriaController extends BaseControllerImp<Categoria, CategoriaC
     public ResponseEntity<List<CategoriaCreateDto>> getAll() {
         return super.getAll();
     }
-
-    @PostMapping()
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPERADMIN')")
-    public ResponseEntity<CategoriaCreateDto> create(@RequestBody CategoriaCreateDto entity){
-        return super.create(entity);
-    }
-
-    @PutMapping("/{id}")
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPERADMIN')")
-    public ResponseEntity<CategoriaCreateDto> edit(@RequestBody CategoriaCreateDto entity, @PathVariable Long id){
-        return super.edit(entity, id);
-    }
-
-    @DeleteMapping("/{id}")
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPERADMIN')")
-    public ResponseEntity<?> deleteById(@PathVariable Long id){
-        return super.deleteById(id);
-    }
 }

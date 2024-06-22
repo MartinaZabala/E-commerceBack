@@ -15,16 +15,6 @@ import org.springframework.context.annotation.Bean;
 public class EcommerceApplication {
 	private static final Logger logger = LoggerFactory.getLogger(EcommerceApplication.class);
 
-
-	@Autowired
-	private EmpresaRepository empresaRepository;
-
-	@Autowired
-	private ImagenEmpresaRepository imagenEmpresaRepository;
-
-	@Autowired
-	private  UnidadMedidaRepository unidadMedidaRepository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceApplication.class, args);
 		logger.info("Estoy activo en el main");
