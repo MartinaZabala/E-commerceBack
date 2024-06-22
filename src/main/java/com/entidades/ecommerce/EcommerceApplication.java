@@ -30,7 +30,6 @@ public class EcommerceApplication {
 		logger.info("Estoy activo en el main");
 	}
 
-
 	@Bean
 	@Transactional
 	CommandLineRunner init() {
