@@ -5,6 +5,7 @@ import com.entidades.ecommerce.business.service.EcommerceService;
 import com.entidades.ecommerce.domain.dto.promocion.PromocionFullDto;
 import com.entidades.ecommerce.domain.entities.Articulo;
 import com.entidades.ecommerce.domain.entities.Categoria;
+import com.entidades.ecommerce.domain.enums.TipoPromocion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,4 +38,10 @@ public class EcommerceFacadeImpl implements EcommerceFacade {
     public Page<PromocionFullDto> getAllFilteredPromocionesSortedByPrecio(Pageable pageable) {
         return ecommerceService.getAllFilteredPromocionesSortedByPrecio(pageable);
     }
+
+    @Override
+    public Page<PromocionFullDto> getAllPromocionesByTipo(Pageable pageable, TipoPromocion tipoPromocion) {
+        return ecommerceService.getAllPromocionesByTipo(pageable, tipoPromocion);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.entidades.ecommerce.business.service;
 import com.entidades.ecommerce.domain.dto.promocion.PromocionFullDto;
 import com.entidades.ecommerce.domain.entities.Articulo;
 import com.entidades.ecommerce.domain.entities.Categoria;
+import com.entidades.ecommerce.domain.enums.TipoPromocion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,5 +18,7 @@ public interface EcommerceService {
     List<Articulo> getAll();
 
     Page<PromocionFullDto> getAllFilteredPromocionesSortedByPrecio(Pageable pageable);
+
+    Page<PromocionFullDto> getAllPromocionesByTipo(Pageable pageable, TipoPromocion tipoPromocion);
 
 }
