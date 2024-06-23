@@ -2,7 +2,9 @@ package com.entidades.ecommerce.repositories;
 
 import com.entidades.ecommerce.domain.dto.promocion.PromocionFullDto;
 import com.entidades.ecommerce.domain.entities.ArticuloManufacturado;
+import com.entidades.ecommerce.domain.entities.Categoria;
 import com.entidades.ecommerce.domain.entities.Promocion;
+import com.entidades.ecommerce.domain.enums.TipoPromocion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +21,7 @@ public interface PromocionRepository extends BaseRepository<Promocion,Long>{
 
     @Query("SELECT p FROM Promocion p WHERE p.eliminado = false")
     Page<Promocion> findPromocion(Pageable pageable);
+
+    @Query("SELECT p FROM Promocion p WHERE p.eliminado = false AND p.tipoPromocion = :tipoPromocion")
+    Page<Promocion> findPromocionesByTipo(Pageable pageable, TipoPromocion tipoPromocion);
 }

@@ -5,6 +5,7 @@ import com.entidades.ecommerce.business.service.CategoriaService;
 import com.entidades.ecommerce.domain.dto.promocion.PromocionFullDto;
 import com.entidades.ecommerce.domain.entities.Articulo;
 import com.entidades.ecommerce.domain.entities.Categoria;
+import com.entidades.ecommerce.domain.enums.TipoPromocion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +48,12 @@ public class EcommerceController {
     @GetMapping("/promociones/sortedByPrecio")
     public ResponseEntity<Page<PromocionFullDto>> getAllFilteredPromocionesSortedByPrecio(Pageable pageable) {
         Page<PromocionFullDto> promociones = ecommerceFacade.getAllFilteredPromocionesSortedByPrecio(pageable);
+        return ResponseEntity.ok(promociones);
+    }
+
+    @GetMapping("/promociones/tipo/{tipoPromocion}")
+    public ResponseEntity<Page<PromocionFullDto>> getPromocionesByTipo(Pageable pageable, @PathVariable TipoPromocion tipoPromocion) {
+        Page<PromocionFullDto> promociones = ecommerceFacade.getAllPromocionesByTipo(pageable, tipoPromocion);
         return ResponseEntity.ok(promociones);
     }
 
