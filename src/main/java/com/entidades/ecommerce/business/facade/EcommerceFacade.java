@@ -1,5 +1,6 @@
 package com.entidades.ecommerce.business.facade;
 
+import com.entidades.ecommerce.domain.dto.promocion.PromocionFullDto;
 import com.entidades.ecommerce.domain.entities.Articulo;
 import com.entidades.ecommerce.domain.entities.Categoria;
 import org.springframework.data.domain.Page;
@@ -14,4 +15,6 @@ public interface EcommerceFacade {
     Page<Articulo> getAllArticulosByCategoria(Pageable pageable, Categoria categoria);
 
     List<Articulo> getAll();
+
+    Page<PromocionFullDto> getAllFilteredPromocionesSortedByPrecio(Pageable pageable);
 }

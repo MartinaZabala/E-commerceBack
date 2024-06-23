@@ -2,6 +2,7 @@ package com.entidades.ecommerce.presentation.rest;
 
 import com.entidades.ecommerce.business.facade.EcommerceFacade;
 import com.entidades.ecommerce.business.service.CategoriaService;
+import com.entidades.ecommerce.domain.dto.promocion.PromocionFullDto;
 import com.entidades.ecommerce.domain.entities.Articulo;
 import com.entidades.ecommerce.domain.entities.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class EcommerceController {
     @Autowired
     private CategoriaService categoriaService;
 
+
     @GetMapping("/articulos")
     public ResponseEntity<List<Articulo>> getAll() {
         List<Articulo> articulos = ecommerceFacade.getAll();
@@ -41,4 +43,11 @@ public class EcommerceController {
         Page<Articulo> articulos = ecommerceFacade.getAllArticulosByCategoria(pageable, categoria);
         return ResponseEntity.ok(articulos);
     }
+
+    @GetMapping("/promociones/sortedByPrecio")
+    public ResponseEntity<Page<PromocionFullDto>> getAllFilteredPromocionesSortedByPrecio(Pageable pageable) {
+        Page<PromocionFullDto> promociones = ecommerceFacade.getAllFilteredPromocionesSortedByPrecio(pageable);
+        return ResponseEntity.ok(promociones);
+    }
+
 }
