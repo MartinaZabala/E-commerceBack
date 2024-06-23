@@ -1,11 +1,11 @@
 package com.entidades.ecommerce.business.service.Imp;
 
+import com.entidades.ecommerce.business.mapper.PromocionMapper;
 import com.entidades.ecommerce.business.service.EcommerceService;
-import com.entidades.ecommerce.domain.entities.Articulo;
-import com.entidades.ecommerce.domain.entities.ArticuloInsumo;
-import com.entidades.ecommerce.domain.entities.ArticuloManufacturado;
-import com.entidades.ecommerce.domain.entities.Categoria;
+import com.entidades.ecommerce.domain.dto.promocion.PromocionFullDto;
+import com.entidades.ecommerce.domain.entities.*;
 import com.entidades.ecommerce.repositories.ArticuloRepository;
+import com.entidades.ecommerce.repositories.PromocionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,12 @@ public class EcommerceServiceImpl implements EcommerceService {
 
     @Autowired
     private ArticuloRepository articuloRepository;
+
+    @Autowired
+    private PromocionRepository promocionRepository;
+
+    @Autowired
+    PromocionMapper promocionMapper;
 
     public List<Articulo> getAll() {
         List<Articulo> allArticulos = new ArrayList<>();
@@ -61,5 +67,17 @@ public class EcommerceServiceImpl implements EcommerceService {
         allArticulos.sort(Comparator.comparingDouble(Articulo::getPrecioVenta));
 
         return new PageImpl<>(allArticulos, pageable, allArticulos.size());
+    }
+
+    @Override
+    public Page<PromocionFullDto> getAllFilteredPromocionesSortedByPrecio(Pageable pageable) {
+        Page<Promocion> promociones = promocionRepository.findPromocion(pageable);
+
+
+        List<PromocionFullDto> allPromociones = new ArrayList<>(promocionMapper.promocionesToPromocionFullDto(promociones.getContent()));
+
+        allPromociones.sort(Comparator.comparingDouble(PromocionFullDto::getPrecioPromocional));
+
+        return new PageImpl<>(allPromociones, pageable, allPromociones.size());
     }
 }
